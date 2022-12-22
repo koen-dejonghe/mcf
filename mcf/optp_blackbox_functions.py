@@ -64,7 +64,7 @@ def black_box_allocation(indata, preddata, c_dict, v_dict, seed):
             obs = len(po_np)
             if c_dict['_ray_or_dask'] == 'ray':
                 if not ray.is_initialized():
-                    ray.init(num_cpus=maxworkers, include_dashboard=False)
+                    ray.init(num_cpus=maxworkers, include_dashboard=True)
                 po_np_ref, data_df_ref = ray.put(po_np), ray.put(data_df)
                 still_running = [ray_bb_allocation_boot.remote(
                     b_idx, obs, po_np_ref, data_df_ref, c_dict, v_dict)

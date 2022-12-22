@@ -604,14 +604,16 @@ def modified_causal_forest_master(controls_dict, variable_dict,
                     c_dict)
                 time9_ate = time.time()
                 cont = c_dict['d_type'] == 'continuous'
+
                 if c_dict['marg_plots'] and c_dict['with_output']:
                     (mgate, mgate_se, mgate_diff, mgate_se_diff, amgate,
-                     amgate_se, amgate_diff, amgate_se_diff
-                     ) = mcf_gate.marg_gates_est(
+                        amgate_se, amgate_diff, amgate_se_diff
+                        ) = mcf_gate.marg_gates_est(
                         forest, fill_y_sample, preddata3, v_dict, c_dict,
                         x_name_mcf, var_x_type, var_x_values, w_ate)
                     mcf_gate_tables.gate_tables_nice(c_dict, gate=False)
                     del forest
+
                 time9_marg = time.time()
                 if c_dict['gate_yes']:
                     gate, gate_se, gate_diff, gate_se_diff = mcf_gate.gate_est(
@@ -742,9 +744,16 @@ def modified_causal_forest_master(controls_dict, variable_dict,
         else:
             outfiletext.close()
         sys.stdout = orig_stdout
-    gate_all = (gate, mgate, mgate_diff, amgate, amgate_diff)
-    gate_se_all = (gate_se, mgate_se,  mgate_se_diff, amgate_se,
-                   amgate_se_diff)
+
+    if c_dict['marg_plots'] and c_dict['with_output']:
+        gate_all = (gate, mgate, mgate_diff, amgate, amgate_diff)
+        gate_se_all = (gate_se, mgate_se,  mgate_se_diff, amgate_se, amgate_se_diff)
+    else:
+        gate_all = ()
+        gate_se_all = ()
+
+     # gate_se_all = (gate_se, mgate_se,  mgate_se_diff, amgate_se,
+                    # amgate_se_diff)
     return (ate, ate_se, gate_all, gate_se_all, iate, iate_se, pot_y,
             pot_y_var, pred_outfile, pot_y_eff, iate_eff, names_pot_iate,
             preddata_all)

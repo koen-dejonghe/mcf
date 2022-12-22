@@ -1,0 +1,14 @@
+pathlib
+numpy
+pandas
+matplotlib
+scipy
+ray[default]
+numba
+scikit-learn
+psutil
+sympy
+dask
+dask[complete]
+jupyterlab
+ipykernel

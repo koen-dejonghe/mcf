@@ -376,7 +376,7 @@ def nn_matched_outcomes(indatei, v_dict, v_type, c_dict):
                     maxworkers = math.ceil(no_of_treat/2)
             if c_dict['_ray_or_dask'] == 'ray':
                 if not ray.is_initialized():
-                    ray.init(num_cpus=maxworkers, include_dashboard=False)
+                    ray.init(num_cpus=maxworkers, include_dashboard=True)
                 x_dat_ref = ray.put(x_dat)
                 still_running = [ray_nn_neighbour_mcf2.remote(
                     y_dat, x_dat_ref, d_dat, obs, cov_x_inv, d_values[idx],

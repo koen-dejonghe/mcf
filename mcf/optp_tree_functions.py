@@ -871,7 +871,7 @@ def optimal_tree_proc(datafile_name, x_type, x_value, v_dict, c_dict):
         maxworkers = c_dict['no_parallel']
         if c_dict['_ray_or_dask'] == 'ray':
             if not ray.is_initialized():
-                ray.init(num_cpus=maxworkers, include_dashboard=False)
+                ray.init(num_cpus=maxworkers, include_dashboard=True)
             data_x_ref = ray.put(data_x)
             data_ps_ref = ray.put(data_ps)
             data_ps_diff_ref = ray.put(data_ps_diff)

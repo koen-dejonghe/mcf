@@ -170,11 +170,11 @@ def get_weights_mp(forest, x_file, y_file, v_dict, c_dict, x_name,
             if c_dict['_ray_or_dask'] == 'ray':
                 if c_dict['mem_object_store_3'] is None:
                     if not ray.is_initialized():
-                        ray.init(num_cpus=maxworkers, include_dashboard=False)
+                        ray.init(num_cpus=maxworkers, include_dashboard=True)
                 else:
                     if not ray.is_initialized():
                         ray.init(
-                            num_cpus=maxworkers, include_dashboard=False,
+                            num_cpus=maxworkers, include_dashboard=True,
                             object_store_memory=c_dict['mem_object_store_3'])
                     if c_dict['with_output'] and c_dict['verbose']:
                         print("Size of Ray Object Store: ",
